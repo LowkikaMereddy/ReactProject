@@ -1,17 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-import Navbar from "./components/Navbar";
+import React, { useState } from 'react';
+import ProductList from './ProductList/ProductList';
+import Signup from './Auth/Signup';
+import Login from './Auth/Login';
+import Cart from './Cart/Cart';
+import Checkout from './Checkout/Checkout';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems([...cartItems, product]);
+  };
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/product/:id" element={<ProductPage />} />
-      </Routes>
-    </Router>
+    <div className="App">
+      <nav>
+        {/* Navigation links (e.g., Home, Products, Signup, Login, Cart) */}
+      </nav>
+      <ProductList addToCart={addToCart} /> {/* Pass addToCart as a prop */}
+      <Signup />
+      <Login />
+      <Cart cartItems={cartItems} />
+      <Checkout />
+    </div>
   );
 }
 
